@@ -1,0 +1,9 @@
+RADIUS version 1.16c ported to OS/2
+
+RADIUS stands for 
+"Remote Authentication Dial In User Service".  
+Multithreaded port made with IBM Visual Age 
+C++ with source code and additional utilties.
+
+
+niceman@worldnet.att.net

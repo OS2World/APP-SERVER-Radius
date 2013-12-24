@@ -1,0 +1,144 @@
+#
+#	This file contains dictionary translations for parsing
+#	requests and generating responses.  All transactions are
+#	composed of Attribute/Value Pairs.  The value of each attribute
+#	is specified as one of 4 data types.  Valid data types are:
+#
+#	string - 0-253 octets
+#	ipaddr - 4 octets in network byte order
+#	integer - 32 bit value in big endian order (high byte first)
+#	date - 32 bit value in big endian order - seconds since
+#					00:00:00 GMT,  Jan.  1,  1970
+#
+#	Enumerated values are stored in the user file with dictionary
+#	VALUE translations for easy administration.
+#
+#	Example:
+#
+#	ATTRIBUTE	  VALUE
+#	---------------   -----
+#	Framed-Protocol = PPP
+#	7		= 1	(integer encoding)
+#
+ATTRIBUTE	User-Name		1	string
+ATTRIBUTE	Password		2	string
+ATTRIBUTE	CHAP-Password		3	string
+ATTRIBUTE	Client-Id		4	ipaddr
+ATTRIBUTE	Client-Port-Id		5	integer
+ATTRIBUTE	User-Service-Type	6	integer
+ATTRIBUTE	Framed-Protocol		7	integer
+ATTRIBUTE	Framed-Address		8	ipaddr
+ATTRIBUTE	Framed-Netmask		9	ipaddr
+ATTRIBUTE	Framed-Routing		10	integer
+ATTRIBUTE	Framed-Filter-Id	11	string
+ATTRIBUTE	Framed-MTU		12	integer
+ATTRIBUTE	Framed-Compression	13	integer
+ATTRIBUTE	Login-Host		14	ipaddr
+ATTRIBUTE	Login-Service		15	integer
+ATTRIBUTE	Login-TCP-Port		16	integer
+ATTRIBUTE	Old-Password		17	string
+ATTRIBUTE	Port-Message		18	string
+ATTRIBUTE	Dialback-No		19	string
+ATTRIBUTE	Dialback-Name		20	string
+ATTRIBUTE	Expiration		21	date
+ATTRIBUTE	Framed-Route		22	string
+ATTRIBUTE	Framed-IPX-Network	23	ipaddr
+ATTRIBUTE	Challenge-State		24	string
+ATTRIBUTE	Sessions		25	integer
+#ATTRIBUTE	Acct-Vendor-Specific	26	integer
+ATTRIBUTE	Session-Timeout		27	integer
+ATTRIBUTE	Idle-Timeout		28	integer
+#ATTRIBUTE	Acct-NAS-Identifier	32	integer
+ATTRIBUTE	Acct-Status-Type	40	integer
+ATTRIBUTE	Acct-Delay-Time		41	integer
+#ATTRIBUTE	Acct-Input-Octects	42	integer
+#ATTRIBUTE	Acct-Output-Octects	43	integer
+ATTRIBUTE	Acct-Session-Id		44	string
+ATTRIBUTE	Acct-Authentic		45	integer
+ATTRIBUTE	Acct-Session-Time	46	integer
+#ATTRIBUTE	Acct-Input-Packets	47	integer
+#ATTRIBUTE	Acct-Output-Packets	48	integer
+ATTRIBUTE	Acct-Terminate-Cause	49	integer
+#ATTRIBUTE	Acct-NAS-Port-Type	61	integer
+
+
+
+VALUE Acct-Terminate-Cause User-Request 1
+VALUE Acct-Terminate-Cause Lost-Carrier 2
+VALUE Acct-Terminate-Cause Lost-Service 3
+VALUE Acct-Terminate-Cause Idle-Timeout 4
+VALUE Acct-Terminate-Cause Session-Timeout 5
+VALUE Acct-Terminate-Cause Admin-Reset 6
+VALUE Acct-Terminate-Cause Admin-Reboot 7
+VALUE Acct-Terminate-Cause Port-Error 8
+VALUE Acct-Terminate-Cause NAS-Error 9
+VALUE Acct-Terminate-Cause NAS-Request 10
+VALUE Acct-Terminate-Cause NAS-Reboot 11
+VALUE Acct-Terminate-Cause Port-Unneeded 12
+VALUE Acct-Terminate-Cause Port-Preempted 13
+VALUE Acct-Terminate-Cause Port-Suspended 14
+VALUE Acct-Terminate-Cause Service-Unavailable 15
+VALUE Acct-Terminate-Cause Callback 16
+VALUE Acct-Terminate-Cause User-Error 17
+VALUE Acct-Terminate-Cause Host-Request 18
+
+
+#
+#	Integer Translations
+#
+
+#	User Types
+
+VALUE		User-Service-Type	Login-User		1
+VALUE		User-Service-Type	Framed-User		2
+VALUE		User-Service-Type	Dialback-Login-User	3
+VALUE		User-Service-Type	Dialback-Framed-User	4
+VALUE		User-Service-Type	Outbound-User		5
+VALUE		User-Service-Type	Admin-User		6
+VALUE		User-Service-Type	Shell-User		7
+
+#	Framed Protocols
+
+VALUE		Framed-Protocol		PPP			1
+VALUE		Framed-Protocol		SLIP			2
+
+#	Framed Routing Values
+
+VALUE		Framed-Routing		None			0
+VALUE		Framed-Routing		Broadcast		1
+VALUE		Framed-Routing		Listen			2
+VALUE		Framed-Routing		Broadcast-Listen	3
+
+#	Framed Compression Types
+
+VALUE		Framed-Compression	None			0
+VALUE		Framed-Compression	Van-Jacobsen-TCP-IP	1
+
+#	Login Services
+
+VALUE		Login-Service		Telnet			0
+VALUE		Login-Service		Rlogin			1
+VALUE		Login-Service		TCP-Clear		2
+VALUE		Login-Service		PortMaster		3
+
+#	Status Types
+
+VALUE		Acct-Status-Type	Start			1
+VALUE		Acct-Status-Type	Stop			2
+
+#	Authentication Types
+
+VALUE		Acct-Authentic		None			0
+VALUE		Acct-Authentic		RADIUS			1
+VALUE		Acct-Authentic		Local			2
+
+#
+# The following values are implementation and site dependent
+# and not transmitted as part of the protocol
+#
+
+#	Configuration Values
+
+#VALUE		Server-Config		Password-Expiration	30
+#VALUE		Server-Config		Password-Warning	5
+

@@ -1,0 +1,310 @@
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.04 [en] (OS/2; U) [Netscape]">
+</HEAD>
+<BODY>
+
+<CENTER>
+<H1>
+Who's On</H1></CENTER>
+<B>Author:</B>&nbsp; Mike Nice <A HREF="mailto:niceman@worldnet.att.net">niceman@worldnet.att.net</A>
+<BR>Copyright &copy; Mike Nice, 1999
+<BR>This program may be freely used and modified for your own use, provided
+this notice remains intact.
+<UL>
+<LI>
+There are no expressed or implied warranties with this software.</LI>
+
+<LI>
+All liabilities in the use of this software rest with the user.</LI>
+</UL>
+<B>Purpose:</B> To view user login information on RADIUS accounting server.
+
+<P><U>How it works</U>
+
+<P>The RADIUS accounting code has a shared memory block in which it records
+an image of who is logged in by examining RADIUS accounting START and STOP
+records. WhosOn generates an HTML-formatted page with accounting information.&nbsp;
+In order to view this information, the RADIUS server must also be running
+a webserver, or you could schedule the CGI version to send its output to
+a shared network drive.
+
+<P>With this design, accounting records sent to a backup accounting server
+will not appear on the who's on page. However, you may designate backup
+authentication servers with no side effects.
+
+<P>There are 2 versions of this program included:
+<BR>&nbsp;
+<OL>
+<LI>
+WHOSON.EXE - CGI version to work with any webserver.</LI>
+
+<LI>
+WHOSON.DLL - PowerWeb add-in will work only with PowerWeb webserver. The
+advantage is that it uses Netscape's ServerPush format and provides updates
+as soon as they occur (no more frequently than once per 15 seconds and
+every 90 seconds if no one logs in or out).</LI>
+</OL>
+
+<H2>
+Installation</H2>
+<B>CGI version Whoson.exe installation</B> - Copy to your webserver's CGI-BIN
+directory.
+<BR><B>Optional Arguments:</B>
+<BR>&nbsp;&nbsp;&nbsp; <B>RefreshRate=nn</B> - Request automatic page refresh
+of nn seconds.
+<BR>&nbsp;&nbsp;&nbsp; <B>portFormat=slot</B> - Changes raw port number
+to a 3Com HiperArc style slot:port type of display.
+<BR><B>Usage examples:</B>
+<UL>
+<LI>
+<B>http://yourServer.yourDomain.com/cgi-bin/whoson.exe</B></LI>
+
+<BR>&nbsp;&nbsp;&nbsp; displays current page with no automatic refresh
+<LI>
+&nbsp;<B>http://yourServer.yourDomain.com/cgi-bin/whoson.exe?portFormat=slot</B></LI>
+
+<BR>&nbsp;&nbsp;&nbsp; displays current page with ports listed in 3Com
+format and no automatic refresh
+<LI>
+&nbsp;<B>http://yourServer.yourDomain.com/cgi-bin/whoson.exe?portFormat=slot&amp;refreshRate=60</B></LI>
+
+<BR>&nbsp;&nbsp;&nbsp; displays current page with ports listed in 3Com
+format and automatic refresh every 60 seconds</UL>
+<B>PowerWeb version WHOSON.DLL installation</B> - copy to your webserver's
+BIN directory.
+<BR><B>Optional Arguments:</B>
+<BR>&nbsp;&nbsp;&nbsp; <B>portFormat=slot</B> - Changes raw port number
+to a 3Com HiperArc style slot:port type of display.
+<BR><B>Usage examples:</B>
+<UL>
+<LI>
+<B>http://yourServer.yourDomain.com/bin/whoson!WhosOn</B></LI>
+
+<BR>&nbsp;&nbsp;&nbsp; displays current page, updates as accounting records
+are received.
+<LI>
+&nbsp;<B>http://yourServer.yourDomain.com/bin/whoson!WhosOn?portFormat=slot</B></LI>
+
+<BR>&nbsp;&nbsp;&nbsp; displays current page with ports listed in 3Com
+format</UL>
+&nbsp;
+
+<P>Sample output format in straight port numbers:
+<BR>&nbsp;
+<CENTER>
+<H1>
+Current Users</H1></CENTER>
+
+<CENTER><TABLE CELLPADDING=15 WIDTH="50%" >
+<TR>
+<TD VALIGN=TOP>
+<CENTER><TABLE BORDER WIDTH="100%" >
+<TR ALIGN=CENTER>
+<TH COLSPAN="4"><FONT SIZE=+2>yourServer.yourDomain.com</FONT></TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TH COLSPAN="4">Total users: 4</TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TH>Username</TH>
+
+<TH>Port</TH>
+
+<TH>IP Addr</TH>
+
+<TH>Time Online</TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>alvin</TD>
+
+<TD>1</TD>
+
+<TD>10.10.3.21</TD>
+
+<TD>00:05:02</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>theodore</TD>
+
+<TD>2</TD>
+
+<TD>10.10.3.72</TD>
+
+<TD>01:04:54</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>fred</TD>
+
+<TD>6</TD>
+
+<TD>10.10.3.28</TD>
+
+<TD><B>00:00:05</B></TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>wilma</TD>
+
+<TD>8</TD>
+
+<TD>10.10.3.47</TD>
+
+<TD>00:05:36</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+<CENTER><TABLE BORDER WIDTH="100%" >
+<TR ALIGN=CENTER>
+<TH COLSPAN="4"><FONT SIZE=+2>Column meanings</FONT></TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TH>Username</TH>
+
+<TH>Port</TH>
+
+<TH>IP Addr</TH>
+
+<TH>Time Online</TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>Username reported by RADIUS client</TD>
+
+<TD>NAS Port number.&nbsp; Some equipment reports this starting at 1, others
+encode a combination of slot / rack / modem number.&nbsp; Display is sorted
+by port number.</TD>
+
+<TD>Address reported by RADIUS client</TD>
+
+<TD>Time since accounting START record was received.&nbsp; Note that if
+the accounting server was down at the time the user logged in, the user
+may have been logged in longer.&nbsp; The accounting STOP record will record
+the correct online time for billing purposes.&nbsp; Times less than 1 minute
+are listed in bold.</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P>Sample output in 3Com format:
+<BR>&nbsp;
+<BR>&nbsp;
+<CENTER><TABLE CELLPADDING=15 WIDTH="50%" >
+<TR>
+<TD VALIGN=TOP>
+<CENTER><TABLE BORDER WIDTH="100%" >
+<CAPTION>
+<CENTER>&nbsp;</CENTER>
+</CAPTION>
+
+<TR ALIGN=CENTER>
+<TH COLSPAN="4"><FONT SIZE=+2>yourServer.yourDomain.com</FONT></TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TH COLSPAN="4">Total users: 7</TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TH>Username</TH>
+
+<TH>Slot: Port</TH>
+
+<TH>IP Addr</TH>
+
+<TH>Time Online</TH>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>alvin</TD>
+
+<TD>7:1</TD>
+
+<TD>10.10.3.111</TD>
+
+<TD>00:44:33</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>theodore</TD>
+
+<TD>7:9</TD>
+
+<TD>10.10.3.150</TD>
+
+<TD>00:23:11</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>fred</TD>
+
+<TD>7:23</TD>
+
+<TD>10.10.3.145</TD>
+
+<TD>02:27:59</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>wilma</TD>
+
+<TD>7:24</TD>
+
+<TD>10.10.3.23</TD>
+
+<TD>00:26:15</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>barney</TD>
+
+<TD>8:1</TD>
+
+<TD>10.10.3.136</TD>
+
+<TD>00:09:00</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>george</TD>
+
+<TD>8:2</TD>
+
+<TD>10.10.3.60</TD>
+
+<TD>01:55:32</TD>
+</TR>
+
+<TR ALIGN=CENTER>
+<TD>pebbles</TD>
+
+<TD>8:3</TD>
+
+<TD>10.10.3.98</TD>
+
+<TD>00:18:44</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;</TD>
+</TR>
+</TABLE></CENTER>
+&nbsp;
+
+<P>If your equipment encodes the NAS port number differently, you can add
+its representation in the source code.
+
+<P><B>Security note:</B> Consider putting this program on a protected page;
+if you make this information public, sooner or later someone will harvest
+your customer list to send spam if not worse!
+</BODY>
+</HTML>

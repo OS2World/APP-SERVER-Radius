@@ -1,0 +1,12 @@
+# This make file is for IBM VisualAge C++ 3.00 or later for IBM OS/2
+
+COMPILE:	whoson.dll
+
+.SUFFIXES:
+
+whoson.dll:	whoson.cpp whoson.def tree.obj tree.c shrmemry.obj {$(INCLUDE)}PowerAPI.hpp {$(LIB)}PowerAPI.lib
+	icc /Gd- /Ge- /Gm+ whoson.cpp tree.c shrmemry.c whoson.def PowerAPI.lib
+	
+#  dllrname whoson.dll CPPOM30=SOCKCRT
+	del whoson.obj
+

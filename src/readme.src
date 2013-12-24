@@ -1,0 +1,17 @@
+ ***  Readme.SRC   ***
+
+The source code requires IBM Visual Age C++ to compile.  It's not
+all pretty; TREE.C has not been prototyped but should be quite
+reliable; it's derived from the BIND NAMED package.
+
+  Getting the TREE.C routines to work from C++ along with callback
+routines is not very clean.  C++ begs for use of templates and / or
+collection classes.  However, one goal of this package is as small
+a footprint as possible to perform well on older hardware.
+
+Change history
+
+ 1.16a 1st public release
+ 1.16b Correct multiple login session detect problem
+       Correct warning threshold logging logic when user has more
+       than one login and has reached max.

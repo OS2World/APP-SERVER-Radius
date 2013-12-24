@@ -1,0 +1,132 @@
+:TARGET.SUFFIXES
+:DEPENDENCY..c .obj 
+:TARGET.all
+:DEPENDENCY.
+.\radiusd.exe
+:RULE..c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE.{.}.c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:TARGET..\radiusd.exe
+:DEPENDENCY.
+.\util.obj
+.\version.obj
+.\acct.obj
+.\attrprint.obj
+.\CRYPT.obj
+.\crypt_ut.obj
+.\dict.obj
+.\getpass.obj
+.\kill.obj
+.\md5.obj
+.\radiusd.obj
+.\shrmemry.obj
+.\timer.obj
+.\users.obj
+{$(LIB)}so32dll.lib
+{$(LIB)}tcp32dll.lib
+:ACTION.Link::Linker
+:COMMAND.
+icc.exe @<<
+ /B" /de"
+ /Feradiusd.exe 
+ so32dll.lib 
+ tcp32dll.lib 
+ .\util.obj
+ .\version.obj
+ .\acct.obj
+ .\attrprint.obj
+ .\CRYPT.obj
+ .\crypt_ut.obj
+ .\dict.obj
+ .\getpass.obj
+ .\kill.obj
+ .\md5.obj
+ .\radiusd.obj
+ .\shrmemry.obj
+ .\timer.obj
+ .\users.obj
+<<
+:TARGET..\util.obj
+:DEPENDENCY.
+.\util.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+:TARGET..\users.obj
+:DEPENDENCY.
+.\users.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+:TARGET..\timer.obj
+:DEPENDENCY.
+.\timer.c
+{.;$(INCLUDE);}timer.h
+:TARGET..\shrmemry.obj
+:DEPENDENCY.
+.\shrmemry.c
+:TARGET..\radiusd.obj
+:DEPENDENCY.
+.\radiusd.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+{.;$(INCLUDE);}crypt.h
+:TARGET..\md5.obj
+:DEPENDENCY.
+.\md5.c
+{.;$(INCLUDE);}md5.h
+:TARGET..\kill.obj
+:DEPENDENCY.
+.\kill.c
+:TARGET..\getpass.obj
+:DEPENDENCY.
+.\getpass.c
+:TARGET..\dict.obj
+:DEPENDENCY.
+.\dict.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+:TARGET..\crypt_ut.obj
+:DEPENDENCY.
+.\crypt_ut.c
+{.;$(INCLUDE);}ufc-crypt.h
+{.;$(INCLUDE);}patchlevel.h
+{.;$(INCLUDE);}pl.h
+{.;$(INCLUDE);}ufc.h
+:TARGET..\CRYPT.obj
+:DEPENDENCY.
+.\CRYPT.C
+{.;$(INCLUDE);}ufc-crypt.h
+:TARGET..\attrprint.obj
+:DEPENDENCY.
+.\attrprint.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+:TARGET..\acct.obj
+:DEPENDENCY.
+.\acct.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h
+{.;$(INCLUDE);}shrMemry.h
+:TARGET..\version.obj
+:DEPENDENCY.
+.\version.c
+{.;$(INCLUDE);}radius.h
+{.;$(INCLUDE);}conf.h
+{.;$(INCLUDE);}pwd.h
+{.;$(INCLUDE);}util.h

@@ -1,0 +1,62 @@
+#
+#	This file contains security and configuration information
+#	for each user.  The first field is the user's name and
+#	can be up to 8 characters in length.  This is followed (on
+#	the same line) with the list of authentication requirements
+#	for that user.  This can include password, comm server name,
+#	comm server port number, and an expiration date of the user's
+#	password.  When an authentication request is receive from
+#	the comm server, these values are tested.
+
+#	Indented (with the tab character) lines following the first
+#	line indicate the configuration values to be passed back to
+#	the comm server to allow the initiation of a user session.
+#	This can include things like the PPP configuration values
+#	or the host to log the user onto.  If not specified, the
+# DEFAULT record login data is used.
+
+# This users file is intended to go with the ESVA improvements to the
+# users file.  The user can log in as "joe.ppp" and we will look for
+# the default setup record "DEFAULT.PPP". 
+
+# Benchmark: a 200 MHz Pentium Pro can search a 1000-user database in
+# this format in about 30 milliseconds.
+
+DEFAULT
+	User-Service-Type = Framed-User,
+	Framed-Protocol = PPP,
+	Framed-Compression = Van-Jacobsen-TCP-IP
+	Session-Timeout = 0
+	Idle-Timeout = 1200
+	Framed-Netmask  = 255.255.255.128
+
+DEFAULT.ppp
+	User-Service-Type = Framed-User,
+	Framed-Protocol = PPP,
+	Framed-Compression = Van-Jacobsen-TCP-IP
+	Framed-Netmask  = 255.255.255.128
+
+# And finally, the last change.  Thanks to a technical idea from MegaZone,
+# we've added a "Sessions" check attribute. which takes a maximum number of
+# simultaneous sessions as an argument.  This goes on the same line as the
+# user name, like so:
+
+#thom		Password = "thequinas", Sessions = 3
+
+# This would allow user "thom" to be logged onto as many as three lines
+# simultaneously.  Setting a limit of one limits a caller to just one line,
+# and setting a limit of zero removes the limit for that user.  Thus you
+# can set a default limit of one session, and then allow some special user
+# (you?) to log on as much as they like.
+
+rhw	Password = "moretest", Sessions = 2
+	Session-Timeout = 14400
+steve	Password = "testing", Sessions = 3
+	Idle-Timeout = 0
+	Framed-Address = 10.0.0.126
+peg	Password = "ge55gep", Sessions = 2
+	Session-Timeout = 900
+seg	Password = "ge66ges", Sessions = 0
+ceg	Password = "ge77gec", Sessions = 2
+	Framed-Address = 10.0.0.125
+deg	Password = "ge88ged", Sessions = 2

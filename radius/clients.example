@@ -1,0 +1,17 @@
+#
+#	This file contains a list of clients which are allowed to
+#	make authentication requests and their encryption key.
+#	The first field is a valid hostname for the client.
+#	The second field (separated by blanks or tabs) is the
+#	encryption key.
+#       Note, for efficiency, place most frequently used entries first
+#	A fully qualified client name with a HOSTS file entry will allow
+#       authentication even if all DNS's are down or unreachable.
+#
+#Client Name		Key
+#----------------	-------------------
+dialup1			testing123
+dialup2.mydomain.com	testing123
+dialup3.mydomain.com	testing123
+localhost		testing123
+

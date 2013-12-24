@@ -1,0 +1,49 @@
+:TARGET.SUFFIXES
+:DEPENDENCY..c .cpp .obj 
+:TARGET.all
+:DEPENDENCY.
+.\whoson.exe
+:RULE..c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE.{G:\download\backroad\cprogs\radius\whoson}.c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE..cpp.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE.{G:\download\backroad\cprogs\radius\whoson}.cpp.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:TARGET..\whoson.exe
+:DEPENDENCY.
+.\shrmemry.obj
+.\whoson.obj
+{$(LIB)}so32dll.lib
+{$(LIB)}tcp32dll.lib
+:ACTION.Link::Linker
+:COMMAND.
+icc.exe @<<
+ /B" /de"
+ /Fewhoson.exe 
+ so32dll.lib 
+ tcp32dll.lib 
+ .\shrmemry.obj
+ .\whoson.obj
+<<
+:TARGET..\shrmemry.obj
+:DEPENDENCY.
+G:\download\backroad\cprogs\radius\whoson\shrmemry.c
+:TARGET..\whoson.obj
+:DEPENDENCY.
+G:\download\backroad\cprogs\radius\whoson\whoson.cpp
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}radius.h
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}shrMemry.h
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}clients.h
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}conf.h
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}pwd.h
+{G:\download\backroad\cprogs\radius\whoson;$(INCLUDE);}util.h

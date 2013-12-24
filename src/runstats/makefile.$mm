@@ -1,0 +1,41 @@
+:TARGET.SUFFIXES
+:DEPENDENCY..c .cpp .obj 
+:TARGET.all
+:DEPENDENCY.
+.\runstats.exe
+:RULE..cpp.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE.{.}.cpp.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE..c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:RULE.{.}.c.obj
+:ACTION.Compile::C++ Compiler
+:COMMAND.
+icc.exe /Ti /Gm /C %s
+:TARGET..\runstats.exe
+:DEPENDENCY.
+.\runstats.obj
+.\shrmemry.obj
+:ACTION.Link::Linker
+:COMMAND.
+icc.exe @<<
+ /B" /de"
+ /Ferunstats.exe 
+ .\runstats.obj
+ .\shrmemry.obj
+<<
+:TARGET..\runstats.obj
+:DEPENDENCY.
+.\runstats.cpp
+{.;$(INCLUDE);}shrMemry.h
+{.;$(INCLUDE);}clients.h
+:TARGET..\shrmemry.obj
+:DEPENDENCY.
+.\shrmemry.c

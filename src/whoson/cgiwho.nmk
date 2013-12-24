@@ -1,0 +1,10 @@
+# This make file is for IBM VisualAge C++ 3.00 or later for IBM OS/2
+
+COMPILE:	whoson.exe
+
+.SUFFIXES:
+
+whoson.exe:	whoson.cpp shrmemry.obj tree.obj tree.c tree.h
+	icc /Gd- /Ge+ /Gm+ /DCGI_BIN whoson.cpp shrmemry.c tree.c
+	del whoson.obj
+
